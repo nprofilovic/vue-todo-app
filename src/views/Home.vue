@@ -1,7 +1,7 @@
 <template>
   <div class="home">
-    <AddTodo v-on:add-todo="addTodo" />
-    <Todos v-bind:todos="todos" v-on:del-todo="deleteTodo" />
+    <AddTodo @v-on:add-todo="addTodo" />
+    <Todos :todos="todos" @v-on:del-todo="deleteTodo" />
   </div>
 </template>
 
@@ -36,8 +36,8 @@ export default {
         .catch(err => console.log(err))
     },
     addTodo(newTodo) {
-      const { title, completed } = newTodo
-      axios.post('https://jsonplaceholder.typicode.com/todos  ', {title, completed})
+      const { title, completed, id } = newTodo
+      axios.post('https://jsonplaceholder.typicode.com/todos  ', {title, completed, id})
         .then(res => this.todos = [...this.todos, res.data])
         .catch(err => console.log(err))
     }
